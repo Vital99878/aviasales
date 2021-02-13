@@ -1,0 +1,11 @@
+@import '../variables';
+
+.filter {
+  background-color: $color-bg-component;
+  grid-column: 1/2;
+  height: 252px;
+  width: 232px;
+  border-radius: 6px;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
+  // todo shadow-box
+}

@@ -1,0 +1,35 @@
+@import '../variables';
+
+.tabs {
+  height: 50px;
+
+  text-align: center;
+  display: flex;
+}
+
+.tab {
+  flex-grow: 1;
+  background-color: $color-bg-component;
+  border: 1px solid $color-tab-border;
+  cursor: pointer;
+
+  &--active {
+    background-color: $color-main;
+  }
+  &:nth-child(1) {
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+    border-right: none;
+  }
+  &:nth-child(2) {
+    border-radius: 0;
+  }
+  &:nth-child(3) {
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border-left: none;
+  }
+  &:focus {
+    outline: none;
+  }
+}
