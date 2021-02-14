@@ -1,11 +1,67 @@
 @import '../variables';
 
 .filter {
+  box-sizing: border-box;
+  position: sticky;
+  top: 50px;
+  padding: 20px 0;
   background-color: $color-bg-component;
   grid-column: 1/2;
   height: 252px;
   width: 232px;
   border-radius: 6px;
-  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
-  // todo shadow-box
+  box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.06);
+  font-family: 'Open Sans', sans-serif;
+  overflow: hidden;
+
+  &__title {
+    font-weight: 600;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 12px;
+    color: #4a4a4a;
+  }
+
+  &__list {
+    list-style: none;
+    height: 100%;
+    margin-left: -40px;
+    margin-bottom: -20px;
+  }
+
+  &__item {
+    height: 40px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 20px 1fr;
+    grid-column-gap: 10px;
+    align-items: center;
+
+    &--active {
+      height: 40px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 20px 1fr;
+      grid-column-gap: 10px;
+      align-items: center;
+      background-color: #f1fcff;
+    }
+
+    input {
+      margin-left: 20px;
+    }
+    //todo input checkbox
+
+    p {
+      margin-left: 20px;
+      font-weight: 400;
+      color: #4a4a4a;
+      font-size: 13px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 }

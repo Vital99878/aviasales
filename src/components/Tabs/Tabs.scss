@@ -1,13 +1,19 @@
 @import '../variables';
 
 .tabs {
-  height: 50px;
-
   text-align: center;
   display: flex;
+
 }
 
 .tab {
+  height: 50px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #4A4A4A;
+  letter-spacing: 0.5px;
+  flex-basis: 0;
   flex-grow: 1;
   background-color: $color-bg-component;
   border: 1px solid $color-tab-border;
@@ -15,6 +21,7 @@
 
   &--active {
     background-color: $color-main;
+    color: $color-bg-component;
   }
   &:nth-child(1) {
     border-top-left-radius: 6px;
@@ -31,5 +38,34 @@
   }
   &:focus {
     outline: none;
+  }
+}
+
+@media (max-width: 576px) {
+  .tabs {
+    flex-direction: column;
+    min-height: 150px;
+  }
+
+  .tab {
+    &:nth-child(1) {
+      border-top-left-radius: 6px;
+      border-top-right-radius: 6px;
+      border-bottom-left-radius: 0;
+      border-bottom: none;
+    }
+    &:nth-child(2) {
+      border-radius: 0;
+    }
+    &:nth-child(3) {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 6px;
+      border-bottom-left-radius: 6px;
+      border-left: 1px solid $color-tab-border;
+      border-top: none;
+    }
+    &:not(:last-child) {
+      margin-bottom: 6px;
+    }
   }
 }

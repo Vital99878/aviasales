@@ -14,3 +14,13 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
+#root {
+  width: 100%;
+  margin: 0;
+  display: grid;
+  place-items: center;
+
+  @media (max-width: 768px) {
+    width: 80%;
+  }
+}

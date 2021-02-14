@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import './App.scss';
+import { response_test } from '../../data';
 
 import CardList from '../Card-List';
 import Filter from '../Filter';
 import Tabs from '../Tabs';
 
 function App() {
-  const [tickets, setTickets] = useState(['ticket-1', 'ticket-2', 'ticket-3']);
+  const [tickets, setTickets] = useState(response_test[0].tickets);
 
   return (
     <div className="App">
@@ -15,7 +16,7 @@ function App() {
         <Tabs />
         <CardList tickets={tickets} />
         <button className="more" type="button">
-          Показать ещё 5 билетов!
+          Показать еще 5 билетов!
         </button>
       </div>
     </div>

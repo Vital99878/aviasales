@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React from 'react';
 import './Tabs.scss';
 // import PropTypes from 'prop-types';
@@ -7,13 +8,13 @@ function Tabs() {
   return (
     <div className="tabs">
       <button className="tab tab--active" type="button">
-        1
+        Самый дешевый
       </button>
       <button className="tab" type="button">
-        2
+        Самый быстрый
       </button>
       <button className="tab" type="button">
-        3
+        Оптимальный
       </button>
     </div>
   );

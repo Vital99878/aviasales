@@ -1,8 +1,55 @@
+@import '../variables';
 .card {
+  box-sizing: border-box;
   height: 184px;
-  background-color: rgba(211, 211, 211, 0.1);
+  background-color: $color-bg-component;
   text-align: center;
+  padding: 20px;
   border-radius: 6px;
-  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
-  // todo shadow-box
+  box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.06);
+  display: grid;
+  grid-template-rows: repeat(3, min-content);
+
+  @media (max-width: 460px) {
+    padding: 8px;
+  }
+
+  &__title {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  &__price {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: $color-main;
+  }
+
+  &__there {
+    height: 40px;
+    margin-bottom: 10px;
+    display: flex;
+  }
+  &__back {
+    height: 40px;
+    display: flex;
+  }
+}
+
+p {
+  margin: 0;
+}
+
+.card__there,
+.card__back {
+  div {
+    width: 141px;
+    text-align: left;
+  }
+  div:not(:last-child) {
+    margin-right: 20px;
+  }
 }
