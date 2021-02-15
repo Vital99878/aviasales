@@ -13,32 +13,32 @@
   @media (max-width: 460px) {
     padding: 8px;
   }
-
-  &__title {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-  }
-
-  &__price {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 24px;
-    font-weight: 600;
-    text-transform: uppercase;
-    color: $color-main;
-  }
-
-  &__there {
-    height: 40px;
-    margin-bottom: 10px;
-    display: flex;
-  }
-  &__back {
-    height: 40px;
-    display: flex;
-  }
 }
 
+.card__title {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.card__price {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: $color-main;
+}
+
+.card__there {
+  height: 40px;
+  margin-bottom: 10px;
+  display: flex;
+}
+
+.card__back {
+  height: 40px;
+  display: flex;
+}
 p {
   margin: 0;
 }

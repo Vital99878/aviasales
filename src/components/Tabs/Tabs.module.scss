@@ -3,7 +3,6 @@
 .tabs {
   text-align: center;
   display: flex;
-
 }
 
 .tab {
@@ -11,7 +10,7 @@
   font-family: 'Open Sans', sans-serif;
   font-weight: 600;
   text-transform: uppercase;
-  color: #4A4A4A;
+  color: #4a4a4a;
   letter-spacing: 0.5px;
   flex-basis: 0;
   flex-grow: 1;
@@ -39,6 +38,11 @@
   &:focus {
     outline: none;
   }
+}
+
+.tabActive {
+  background-color: $color-main;
+  color: $color-bg-component;
 }
 
 @media (max-width: 576px) {

@@ -5,7 +5,7 @@
 /.idea
 /.pnp
 .pnp.js
-/src/components/Test
+/src/components/Checkbox_test/
 
 # testing
 /coverage

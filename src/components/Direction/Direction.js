@@ -1,7 +1,7 @@
 import React from 'react';
-import './Direction.scss';
 import PropTypes from 'prop-types';
 import { formatDistance } from 'date-fns';
+import classes from './Direction.module.scss';
 
 const Direction = ({ segment }) => {
   const { origin, destination, date, stops, duration } = segment;
@@ -36,18 +36,18 @@ const Direction = ({ segment }) => {
   const transfer = update_transfer(stops);
 
   return (
-    <div className="direction">
-      <div className="direction__part">
-        <p className="direction__title">{`${origin} - ${destination}`}</p>
-        <p className="direction__data">{`${time_begin} - ${time_end}`}</p>
+    <div className={classes.direction}>
+      <div className={classes.direction__part}>
+        <p className={classes.direction__title}>{`${origin} - ${destination}`}</p>
+        <p className={classes.direction__data}>{`${time_begin} - ${time_end}`}</p>
       </div>
-      <div className="direction__part">
-        <p className="direction__title">В ПУТИ</p>
-        <p className="direction__data">{time}</p>
+      <div className={classes.direction__part}>
+        <p className={classes.direction__title}>В ПУТИ</p>
+        <p className={classes.direction__data}>{time}</p>
       </div>
-      <div className="direction__part">
-        <p className="direction__title">{`${stops.length ? stops.length : ''} ${transfer}`}</p>
-        <p className="direction__data">{stops.length === 0 ? `\u2014` : stops.join(', ')}</p>
+      <div className={classes.direction__part}>
+        <p className={classes.direction__title}>{`${stops.length ? stops.length : ''} ${transfer}`}</p>
+        <p className={classes.direction__data}>{stops.length === 0 ? `\u2014` : stops.join(', ')}</p>
       </div>
     </div>
   );
