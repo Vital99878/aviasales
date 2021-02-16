@@ -1,63 +1,55 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import * as actions from '../../actions';
 import './Filter.scss';
 
-const Filter = () => {
-  const [all, setAll] = useState({ check: '', active_class: '' });
-  const { check, active_class } = all;
-
-  const toggleAll = (evt) => {
-    const filter = evt.target.dataset.toggle;
-    const { checked } = evt.target;
-    if (filter === 'all') {
-      if (checked) {
-        setAll({ check: 'checked', active_class: 'filter__item--active' });
-      } else {
-        setAll({ check: '', active_class: '' });
-      }
-    }
+const Filter = ({ toggle_transfers, toggle_all_transfers }) => {
+  const get_quantity_transfer = (evt) => {
+    const quantity = evt.target.dataset.transfers;
+    toggle_transfers(quantity);
   };
 
-  const toggleOne = (evt) => {
-    const filter = evt.target.dataset.toggle;
-    const { checked } = evt.target;
+  const get_all_transfer = () => {
+    toggle_all_transfers();
   };
 
   return (
     <div className="filter">
       <div className="filter__title">Количество пересадок</div>
       <ul className="filter__list">
-        <li className={`filter__item ${active_class}`} key="1">
+        <li className="filter__item filter__item--active" key="1">
           <label className="filter__checkbox">
             Все
-            <input onClick={toggleAll} checked={check} type="checkbox" data-toggle="all" />
+            <input onClick={get_all_transfer} type="checkbox" />
             <span className="checkmark" />
           </label>
         </li>
-        <li className={`filter__item ${active_class}`} key="2">
+        <li className={`filter__item `} key="2">
           <label className="filter__checkbox">
             Без пересадок
-            <input onClick={toggleOne} checked={false} type="checkbox" data-toggle="!all" />
+            <input onClick={get_quantity_transfer} type="checkbox" data-transfers="0" />
             <span className="checkmark" />
           </label>
         </li>
-        <li className={`filter__item ${active_class}`} key="3">
+        <li className="filter__item" key="3">
           <label className="filter__checkbox">
             1 пересадка
-            <input onClick={toggleOne} checked={check} type="checkbox" data-toggle="1" />
+            <input onClick={get_quantity_transfer} type="checkbox" data-transfers="1" />
             <span className="checkmark" />
           </label>
         </li>
-        <li className={`filter__item ${active_class}`} key="4">
+        <li className="filter__item" key="4">
           <label className="filter__checkbox">
             2 пересадки
-            <input onClick={toggleOne} checked={check} type="checkbox" data-toggle="2" />
+            <input onClick={get_quantity_transfer} type="checkbox" data-transfers="2" />
             <span className="checkmark" />
           </label>
         </li>
-        <li className={`filter__item ${active_class}`} key="5">
+        <li className="filter__item" key="5">
           <label className="filter__checkbox">
             3 пересадки
-            <input onClick={toggleOne} checked={check} type="checkbox" data-toggle="3" />
+            <input onClick={get_quantity_transfer} type="checkbox" data-transfers="3" />
             <span className="checkmark" />
           </label>
         </li>
@@ -66,4 +58,18 @@ const Filter = () => {
   );
 };
 
-export default Filter;
+const mapStateToProps = (state) => ({
+  filter: state.filter,
+});
+
+Filter.propTypes = {
+  toggle_transfers: PropTypes.func.isRequired,
+  toggle_all_transfers: PropTypes.func.isRequired,
+};
+Filter.defaultProp = {
+  toggle_transfers: PropTypes.func,
+  toggle_all_transfers: PropTypes.func,
+  //  filter: 'all',
+};
+
+export default connect(mapStateToProps, actions)(Filter);
