@@ -206,3 +206,8 @@ export const response_test = [
     stop: false,
   },
 ];
+
+export function rm_class(claz) {
+  const item = document.querySelector(`.${claz}`);
+  item.classList.remove(claz);
+}
