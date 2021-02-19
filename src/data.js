@@ -2,7 +2,7 @@ export const response_test = [
   {
     tickets: [
       {
-        price: 73346,
+        price: 100000,
         carrier: 'TG', // Код авиакомпании перевозчика
         segments: [
           // 1 туда, 2 обратно
