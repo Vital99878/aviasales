@@ -7,13 +7,11 @@ const reducer = (state = initial_state, action) => {
     case 'TRANSFERS':
       // eslint-disable-next-line no-case-declarations
       const { quality } = action.payload;
-
       if (state.transfers.includes(quality)) {
         state.transfers = state.transfers.filter((item) => item !== quality);
       } else {
         state.transfers.push(quality);
       }
-
       state.tickets = initial_state[0].tickets.filter((ticket) =>
         state.transfers.includes(ticket.segments[0].stops.length)
       );
@@ -30,11 +28,9 @@ const reducer = (state = initial_state, action) => {
       } else {
         state.transfers = [];
       }
-
       state.tickets = initial_state[0].tickets.filter((ticket) =>
         state.transfers.includes(ticket.segments[0].stops.length)
       );
-
       return { tickets: state.tickets, transfers: state.transfers, active_all: !state.active_all };
 
     default:
