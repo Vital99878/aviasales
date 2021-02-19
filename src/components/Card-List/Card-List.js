@@ -11,9 +11,6 @@ const CardList = ({ tickets }) => {
 };
 
 CardList.defaultProp = {
-  label: '',
-  created: 'ett',
-  status: '',
   id: Math.random() * 784,
 };
 CardList.propTypes = {

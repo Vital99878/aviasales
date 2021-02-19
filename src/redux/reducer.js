@@ -1,11 +1,11 @@
-import { response_test } from './data';
+import { response_test } from '../data';
+import { getId, getTickets } from '../tickets/tickets_api';
 
 const initial_state = response_test;
 
 const reducer = (state = initial_state, action) => {
   switch (action.type) {
     case 'TRANSFERS':
-      // eslint-disable-next-line no-case-declarations
       const { quality } = action.payload;
       if (state.transfers.includes(quality)) {
         state.transfers = state.transfers.filter((item) => item !== quality);

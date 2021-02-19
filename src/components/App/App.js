@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import classes from './App.module.scss';
-import { response_test } from '../../data';
 
 import CardList from '../Card-List';
 import Filter from '../Filter';

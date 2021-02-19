@@ -1,6 +1,6 @@
+/* eslint-disable no-shadow,consistent-return */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { formatDistance } from 'date-fns';
 import classes from './Direction.module.scss';
 
 const Direction = ({ segment }) => {
@@ -17,7 +17,6 @@ const Direction = ({ segment }) => {
   const time_end_minutes = add_zero((new Date(date).getMinutes() + (duration % 60)) % 60);
   const time_end = `${time_end_hours}:${time_end_minutes}`;
 
-  // eslint-disable-next-line no-shadow,consistent-return
   const update_transfer = (stops) => {
     if (stops.length === 0) {
       return 'без пересадок';
