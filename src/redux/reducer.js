@@ -34,8 +34,12 @@ const reducer = (state = initial_state, action) => {
       return { tickets: state.tickets, transfers: state.transfers, active_all: !state.active_all, load_tickets: true };
 
     case 'TICKETS':
-      const { tickets } = action.payload;
-      return { tickets, load_tickets: true, transfers: [] };
+      let { tickets, load_all } = action.payload;
+      tickets = [...state.tickets, ...tickets];
+      console.log(tickets);
+      const visible_tickets = tickets.splice(0, 5);
+      console.log(visible_tickets);
+      return { tickets: visible_tickets, load_tickets: true, transfers: [], load_all: load_all };
 
     default:
       return { tickets: state[0].tickets, transfers: [], load_tickets: false };

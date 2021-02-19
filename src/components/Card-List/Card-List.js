@@ -6,8 +6,8 @@ import * as actions from '../../redux/actions';
 
 import Card from '../Card';
 
-const CardList = ({ tickets, get_tickets, load_tickets }) => {
-  if (!load_tickets) {
+const CardList = ({ tickets, get_tickets, load_tickets, load_all }) => {
+  if (load_all) {
     get_tickets();
   }
   const list = tickets.map((ticket) => <Card ticket={ticket} />);
@@ -22,6 +22,7 @@ CardList.propTypes = {
   tickets: PropTypes.string.isRequired,
   get_tickets: PropTypes.func.isRequired,
   load_tickets: PropTypes.bool.isRequired,
+  load_all: PropTypes.bool.isRequired,
 };
 const mapStateToProps = (state) => ({
   tickets: state.tickets,

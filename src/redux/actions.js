@@ -5,7 +5,7 @@ export const toggle_all_transfers = () => ({ type: 'ALL_TRANSFERS' });
 
 export function get_tickets() {
   return async (dispatch) => {
-    const data = await getId().then((res) => getTickets(res));
-    dispatch({ type: 'TICKETS', payload: { tickets: data[0] } });
+    const [tickets, load_all] = await getId().then((res) => getTickets(res));
+    dispatch({ type: 'TICKETS', payload: { tickets, load_all } });
   };
 }
