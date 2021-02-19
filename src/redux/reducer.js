@@ -33,16 +33,22 @@ const reducer = (state = initial_state, action) => {
       );
       return { tickets: state.tickets, transfers: state.transfers, active_all: !state.active_all, load_tickets: true };
 
+    case 'SET_ID':
+      return { tickets: state.tickets, searchId: action.payload.searchId };
+
     case 'TICKETS':
-      let { tickets, load_all } = action.payload;
-      tickets = [...state.tickets, ...tickets];
-      console.log(tickets);
-      const visible_tickets = tickets.splice(0, 5);
-      console.log(visible_tickets);
-      return { tickets: visible_tickets, load_tickets: true, transfers: [], load_all: load_all };
+      let { tickets, stop } = action.payload;
+      //      const visible_tickets = tickets.splice(0, 5);
+      return {
+        tickets: [...state.tickets, ...tickets],
+        load_tickets: true,
+        transfers: [],
+        stop,
+        searchId: state.searchId,
+      };
 
     default:
-      return { tickets: state[0].tickets, transfers: [], load_tickets: false };
+      return { tickets: state[0].tickets, transfers: [], load_tickets: false, searchId: null, stop: false };
   }
 };
 
