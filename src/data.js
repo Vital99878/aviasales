@@ -211,3 +211,11 @@ export function rm_class(claz) {
   const item = document.querySelector(`.${claz}`);
   item.classList.remove(claz);
 }
+
+//all_tickets,
+//visible_tickets,
+//transfers,
+//active_all: transfers.length === 4,
+//load_tickets: true,
+//searchId: state.searchId,
+//stop_load: state.stop_load,

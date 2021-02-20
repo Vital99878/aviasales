@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import * as actions from '../../redux/actions';
 import './Filter.scss';
 
-const Filter = ({ toggle_transfers, toggle_all_transfers, active_all }) => {
+const Filter = ({ toggle_transfers, select_all_transfers, active_all }) => {
   const select_all = () => {
     const all_items = document.querySelectorAll('.filter__item');
     const all_inputs = document.querySelectorAll('input');
@@ -16,7 +16,7 @@ const Filter = ({ toggle_transfers, toggle_all_transfers, active_all }) => {
       for (let i = 1; i < all_inputs.length; i++) {
         all_inputs[i].checked = true;
       }
-      toggle_all_transfers();
+      select_all_transfers();
     } else {
       for (let i = 0; i < all_items.length; i++) {
         all_items[i].className = 'filter__item';
@@ -24,7 +24,7 @@ const Filter = ({ toggle_transfers, toggle_all_transfers, active_all }) => {
       for (let i = 1; i < all_inputs.length; i++) {
         all_inputs[i].checked = false;
       }
-      toggle_all_transfers();
+      select_all_transfers();
     }
   };
 
@@ -35,8 +35,19 @@ const Filter = ({ toggle_transfers, toggle_all_transfers, active_all }) => {
     item.classList.toggle('filter__item--active');
   };
 
-  const checked = active_all ? 'checked' : null;
-  const active_class = checked ? 'filter__item--active' : '';
+  const active_class = active_all ? 'filter__item--active' : '';
+  const checked = active_all ? 'checked' : '';
+
+  useEffect(() => {
+    const all_items = document.querySelectorAll('.filter__item');
+    const all_inputs = document.querySelectorAll('input');
+    for (let i = 0; i < all_items.length; i++) {
+      all_items[i].className = 'filter__item filter__item--active';
+    }
+    for (let i = 0; i < all_inputs.length; i++) {
+      all_inputs[i].checked = true;
+    }
+  }, []);
 
   return (
     <div className="filter">
@@ -45,7 +56,7 @@ const Filter = ({ toggle_transfers, toggle_all_transfers, active_all }) => {
         <li className={`filter__item ${active_class}`} key="1">
           <label className="filter__checkbox">
             Все
-            <input onClick={select_all} type="checkbox" checked={checked} data-transfers="8" />
+            <input onClick={select_all} checked={checked} type="checkbox" data-transfers="8" />
             <span className="checkmark" />
           </label>
         </li>
@@ -86,16 +97,19 @@ const mapStateToProps = (state) => ({
   filter: state.filter,
   transfers: state.transfers,
   active_all: state.active_all,
+  checked: state.checked,
+  active_class: state.active_class,
 });
 
 Filter.propTypes = {
   toggle_transfers: PropTypes.func.isRequired,
-  toggle_all_transfers: PropTypes.func.isRequired,
+  select_all_transfers: PropTypes.func.isRequired,
   active_all: PropTypes.string.isRequired,
+  //  checked: PropTypes.string.isRequired,
 };
 Filter.defaultProp = {
   toggle_transfers: PropTypes.func,
-  toggle_all_transfers: PropTypes.func,
+  select_all_transfers: PropTypes.func,
   //  filter: 'all',
 };
 

@@ -6,17 +6,16 @@ import * as actions from '../../redux/actions';
 
 import Card from '../Card';
 
-const CardList = ({ tickets, get_tickets, stop, searchId, setId }) => {
-  console.log(tickets);
+const CardList = ({ get_tickets, stop_load, searchId, setId, visible_tickets }) => {
   if (!searchId) {
     setId();
   }
 
-  if (searchId && !stop) {
+  if (searchId && !stop_load) {
     get_tickets(searchId);
   }
 
-  const list = tickets.map((ticket) => <Card ticket={ticket} />);
+  const list = visible_tickets.map((ticket) => <Card ticket={ticket} />);
   return <ul className={classes['card-list']}>{list}</ul>;
 };
 
@@ -25,18 +24,19 @@ CardList.defaultProp = {
 };
 
 CardList.propTypes = {
-  tickets: PropTypes.string.isRequired,
+  visible_tickets: PropTypes.string.isRequired,
   searchId: PropTypes.string.isRequired,
   get_tickets: PropTypes.func.isRequired,
   setId: PropTypes.func.isRequired,
-  stop: PropTypes.bool.isRequired,
+  stop_load: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  tickets: state.tickets,
+  visible_tickets: state.visible_tickets,
   load_tickets: state.load_tickets,
   searchId: state.searchId,
   load_all: state.load_all,
+  transfers: state.transfers,
 });
 
 export default connect(mapStateToProps, actions)(CardList);
