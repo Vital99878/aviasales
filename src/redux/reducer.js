@@ -13,7 +13,7 @@ const reducer = (state = initial_state, action) => {
         transfers.push(quality);
       }
       visible_tickets = all_tickets
-        .filter((ticket) => transfers.includes(ticket.segments[0].stops.length))
+        .filter((ticket) => transfers.includes(ticket.segments[0].stops.length + ticket.segments[1].stops.length))
         .splice(0, 5);
 
       return { ...state, all_tickets, visible_tickets, transfers, active_all: transfers.length === 4 };
@@ -47,9 +47,19 @@ const reducer = (state = initial_state, action) => {
       state.visible_tickets = state.all_tickets
         .filter((ticket) => state.transfers.includes(ticket.segments[0].stops.length))
         .splice(0, 5);
-      console.log(state.all_tickets);
 
       return { ...state, all_tickets: state.all_tickets, visible_tickets: state.visible_tickets, stop_load: stop };
+
+    case 'TAB':
+      //      state.all_tickets = state.all_tickets.sort((a, b) => a.price - b.price);
+      //      return { ...state, all_tickets: state.all_tickets, visible_tickets: state.all_tickets.splice(0, 5) };
+      state.all_tickets = state.all_tickets.sort((a, b) => {
+        const duration_a = a.segments[0].duration + a.segments[1].duration;
+        const duration_b = b.segments[0].duration + b.segments[1].duration;
+        return duration_a - duration_b;
+      });
+
+      return { ...state, all_tickets: state.all_tickets, visible_tickets: state.all_tickets.splice(0, 5) };
 
     default:
       return {
