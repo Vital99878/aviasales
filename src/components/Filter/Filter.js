@@ -99,6 +99,7 @@ const mapStateToProps = (state) => ({
   active_all: state.active_all,
   checked: state.checked,
   active_class: state.active_class,
+  sorted_tickets: state.sorted_tickets,
 });
 
 Filter.propTypes = {

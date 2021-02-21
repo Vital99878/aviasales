@@ -4,15 +4,30 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import classes from './Tabs.module.scss';
 
-function Tabs({ test }) {
+function Tabs({ onToggleTab }) {
   const { tabs, tab, tabActive } = classes;
+
+  function remove_class(current_class) {
+    const item = document.querySelector(`.${current_class}`);
+    item.classList.remove(current_class);
+  }
+
+  const toggle_tab = (evt) => {
+    const item = evt.target;
+    const tab_value = evt.target.textContent;
+    if (item.classList.contains(tab)) {
+      remove_class(tabActive);
+      item.classList.add(tabActive);
+    }
+    onToggleTab(tab_value);
+  };
 
   return (
     <div className={tabs}>
-      <button className={`${tab} ${tabActive}`} onClick={test} type="button">
+      <button className={`${tab} ${tabActive}`} onClick={toggle_tab} type="button">
         Самый дешевый
       </button>
-      <button className={tab} onClick={test} type="button">
+      <button className={tab} onClick={toggle_tab} type="button">
         Самый быстрый
       </button>
     </div>
@@ -20,16 +35,12 @@ function Tabs({ test }) {
 }
 
 Tabs.propTypes = {
-  test: PropTypes.func.isRequired,
+  onToggleTab: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  visible_tickets: state.visible_tickets,
-});
-
 const mapDispatchToProps = (dispatch) => ({
-  test: () => dispatch({ type: 'TAB' }),
+  onToggleTab: (tab) => dispatch({ type: 'TAB', payload: { tab } }),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Tabs);
+export default connect(null, mapDispatchToProps)(Tabs);
 // export default Tabs;

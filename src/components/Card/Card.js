@@ -10,7 +10,7 @@ const Card = ({ ticket }) => {
     <li className={classes.card} key={Math.random() * 15000}>
       <div className={classes.card__title}>
         <p className={classes.card__price}>{`${price.toLocaleString('ru')} р`}</p>
-        <img src={S7_logo} alt={carrier} />
+        <img src={`http://pics.avs.io/99/36/${carrier}.png`} alt={carrier} />
       </div>
       <Direction segment={segments[0]} />
       <Direction segment={segments[1]} />

@@ -4,6 +4,7 @@ import classes from './App.module.scss';
 import CardList from '../Card-List';
 import Filter from '../Filter';
 import Tabs from '../Tabs';
+import More from '../More';
 
 function App() {
   return (
@@ -12,9 +13,7 @@ function App() {
       <div className={classes['column-2']}>
         <Tabs />
         <CardList />
-        <button className={classes.more} type="button">
-          Показать еще 5 билетов!
-        </button>
+        <More />
       </div>
     </div>
   );

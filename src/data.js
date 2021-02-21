@@ -219,3 +219,5 @@ export function rm_class(claz) {
 //load_tickets: true,
 //searchId: state.searchId,
 //stop_load: state.stop_load,
+
+// http://pics.avs.io/99/36/{LOGO}.png
