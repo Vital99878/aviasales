@@ -4,6 +4,7 @@ const initial_state = response_test;
 
 const reducer = (state = initial_state, action) => {
   switch (action.type) {
+    // todo if [], return "msg: no tickets"
     case 'TRANSFERS':
       let { transfers, visible_tickets, sorted_tickets, filtered_tickets } = state;
       const { quality } = action.payload;
@@ -27,6 +28,7 @@ const reducer = (state = initial_state, action) => {
       };
 
     case 'ALL_TRANSFERS':
+      // todo if [], return "msg: no tickets
       let { active_all } = state;
       if (state.transfers.length < 4) {
         state.transfers = [0, 1, 2, 3];
@@ -40,6 +42,7 @@ const reducer = (state = initial_state, action) => {
         state.transfers.includes(ticket.segments[0].stops.length)
       );
       state.visible_tickets = state.filtered_tickets.splice(state.index, 5);
+      console.log(state.visible_tickets);
 
       return {
         ...state,
@@ -53,20 +56,26 @@ const reducer = (state = initial_state, action) => {
 
     case 'NEW_TICKETS':
       let { new_tickets, stop } = action.payload;
-      state.all_tickets = [...state.all_tickets, ...new_tickets];
-      state.sorted_tickets = state.all_tickets
-        .filter((ticket) => state.transfers.includes(ticket.segments[0].stops.length))
-        .sort((a, b) => a.price - b.price);
-      state.visible_tickets = state.sorted_tickets.splice(state.index, 5);
 
-      return {
-        ...state,
-        all_tickets: state.all_tickets,
-        sorted_tickets: state.sorted_tickets,
-        visible_tickets: state.visible_tickets,
-        filtered_tickets: state.sorted_tickets,
-        stop_load: stop,
-      };
+      if (new_tickets) {
+        if (state.stop_load) {
+          stop = true;
+        }
+        state.all_tickets = [...state.all_tickets, ...new_tickets];
+        state.sorted_tickets = state.all_tickets
+          .filter((ticket) => state.transfers.includes(ticket.segments[0].stops.length))
+          .sort((a, b) => a.price - b.price);
+        state.visible_tickets = state.sorted_tickets.splice(state.index, 5);
+
+        return {
+          ...state,
+          all_tickets: state.all_tickets,
+          sorted_tickets: state.sorted_tickets,
+          visible_tickets: state.visible_tickets,
+          filtered_tickets: state.sorted_tickets,
+          stop_load: stop,
+        };
+      }
 
     case 'TAB':
       const { tab } = action.payload;
@@ -100,14 +109,14 @@ const reducer = (state = initial_state, action) => {
 
     default:
       return {
-        all_tickets: state[0].tickets.sort((a, b) => a.price - b.price),
+        all_tickets: state[0].tickets,
         visible_tickets: state[0].tickets.splice(0, 5),
         transfers: [0, 1, 2, 3],
-        searchId: null,
+        searchId: false,
         stop_load: false,
         active_all: true,
         index: 0,
-        sorted_tickets: [],
+        sorted_tickets: state[0].tickets.sort((a, b) => a.price - b.price),
       };
   }
 };

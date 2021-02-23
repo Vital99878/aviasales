@@ -1,22 +1,32 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Spin } from 'antd';
 import classes from './Card-List.module.scss';
-import * as actions from '../../redux/actions';
-
+import { get_tickets, setId } from '../../redux/actions';
+// import 'antd/dist/antd.css';
 import Card from '../Card';
 
-const CardList = ({ get_tickets, stop_load, searchId, setId, visible_tickets }) => {
-  if (!searchId) {
-    setId();
-  }
+const CardList = ({ on_get_tickets, onSetId, stop_load, searchId, visible_tickets }) => {
+  useEffect(() => {
+    onSetId();
+  }, []);
 
   if (searchId && !stop_load) {
-    get_tickets(searchId);
+    on_get_tickets(searchId).catch(() => [[], false]);
   }
 
   const list = visible_tickets.map((ticket) => <Card ticket={ticket} />);
-  return <ul className={classes['card-list']}>{list}</ul>;
+  return (
+    <ul className={classes['card-list']}>
+      {!stop_load ? (
+        <li>
+          <Spin tip="Tickets loading..." />
+        </li>
+      ) : null}
+      {list.length === 0 && stop_load ? <Spin tip="try another filter" /> : list}
+    </ul>
+  );
 };
 
 CardList.defaultProp = {
@@ -26,8 +36,8 @@ CardList.defaultProp = {
 CardList.propTypes = {
   visible_tickets: PropTypes.string.isRequired,
   searchId: PropTypes.string.isRequired,
-  get_tickets: PropTypes.func.isRequired,
-  setId: PropTypes.func.isRequired,
+  on_get_tickets: PropTypes.func.isRequired,
+  onSetId: PropTypes.func.isRequired,
   stop_load: PropTypes.bool.isRequired,
 };
 
@@ -35,8 +45,13 @@ const mapStateToProps = (state) => ({
   visible_tickets: state.visible_tickets,
   load_tickets: state.load_tickets,
   searchId: state.searchId,
-  load_all: state.load_all,
+  stop_load: state.stop_load,
   transfers: state.transfers,
 });
 
-export default connect(mapStateToProps, actions)(CardList);
+const mapDispatchToProps = (dispatch) => ({
+  on_get_tickets: (id) => dispatch(get_tickets(id)),
+  onSetId: () => dispatch(setId()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CardList);

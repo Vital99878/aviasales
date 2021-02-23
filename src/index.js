@@ -9,7 +9,7 @@ import App from './components/App';
 
 const loggerMiddleware = (store) => (next) => (action) => {
   const result = next(action);
-  //    console.log('Middleware:', store.getState());
+  //      console.log('Middleware:', store.getState());
   return result;
 };
 
