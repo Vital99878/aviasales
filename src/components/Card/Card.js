@@ -8,7 +8,7 @@ const Card = ({ ticket }) => {
   const { date } = segments[0];
 
   return (
-    <li className={classes.card} key={date + price}>
+    <li className={classes.card} key={date + price + segments[0].stops.toString()}>
       <div className={classes.card__title}>
         <p className={classes.card__price}>{`${price.toLocaleString('ru')} р`}</p>
         <img src={`http://pics.avs.io/99/36/${carrier}.png`} alt={carrier} />
@@ -20,6 +20,8 @@ const Card = ({ ticket }) => {
 };
 
 Card.propTypes = {
-  ticket: PropTypes.string.isRequired,
+  // todo react/forbid-prop-types
+  // eslint-disable-next-line react/forbid-prop-types
+  ticket: PropTypes.object.isRequired,
 };
 export default Card;

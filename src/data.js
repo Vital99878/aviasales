@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 export const response_test = [
   {
     tickets: [
@@ -246,3 +248,11 @@ export const response_test = [
     stop: false,
   },
 ];
+
+//{
+//  origin: PropTypes.string.isRequired,
+//  destination: PropTypes.string.isRequired,
+//date: PropTypes.string.isRequired,
+//stops: PropTypes.arrayOf(PropTypes.string).isRequired,
+//duration: PropTypes.number.isRequired,
+//}

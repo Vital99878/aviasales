@@ -14,10 +14,11 @@ const CardList = ({ on_get_tickets, onSetId, stop_load, searchId, visible_ticket
   }, []);
 
   if (searchId && !stop_load) {
-    on_get_tickets(searchId).catch(() => [[], false]);
+    on_get_tickets(searchId);
   }
 
   const list = visible_tickets.map((ticket) => <Card ticket={ticket} />);
+
   return (
     <>
       {!stop_load ? <Spin tip="Tickets loading" /> : null}
@@ -31,7 +32,7 @@ const CardList = ({ on_get_tickets, onSetId, stop_load, searchId, visible_ticket
 };
 
 CardList.propTypes = {
-  visible_tickets: PropTypes.string.isRequired,
+  visible_tickets: PropTypes.arrayOf(PropTypes.object).isRequired,
   searchId: PropTypes.string.isRequired,
   on_get_tickets: PropTypes.func.isRequired,
   onSetId: PropTypes.func.isRequired,
@@ -40,10 +41,8 @@ CardList.propTypes = {
 
 const mapStateToProps = (state) => ({
   visible_tickets: state.visible_tickets,
-  load_tickets: state.load_tickets,
   searchId: state.searchId,
   stop_load: state.stop_load,
-  transfers: state.transfers,
 });
 
 const mapDispatchToProps = (dispatch) => ({

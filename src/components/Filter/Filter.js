@@ -56,7 +56,7 @@ const Filter = ({ toggle_transfers, select_all_transfers, active_all }) => {
         <li className={`${classes.filter__item} ${active_class}`} key="1">
           <label className={classes.filter__checkbox}>
             Все
-            <input onClick={select_all} checked={checked} type="checkbox" data-transfers="8" />
+            <input onClick={select_all} defaultChecked={checked} type="checkbox" data-transfers="8" />
             <span className={classes.checkmark} />
           </label>
         </li>
@@ -105,7 +105,7 @@ const mapStateToProps = (state) => ({
 Filter.propTypes = {
   toggle_transfers: PropTypes.func.isRequired,
   select_all_transfers: PropTypes.func.isRequired,
-  active_all: PropTypes.string.isRequired,
+  active_all: PropTypes.bool.isRequired,
 };
 
 export default connect(mapStateToProps, actions)(Filter);

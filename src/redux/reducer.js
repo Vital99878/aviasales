@@ -109,7 +109,7 @@ const reducer = (state = initial_state, action) => {
         all_tickets: state[0].tickets,
         visible_tickets: state[0].tickets.splice(0, 5),
         transfers: [0, 1, 2, 3],
-        searchId: false,
+        searchId: '',
         stop_load: false,
         active_all: true,
         index: 0,

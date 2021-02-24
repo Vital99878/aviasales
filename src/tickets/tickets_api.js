@@ -6,13 +6,14 @@ class Tickets_api {
   }
 
   async getTickets(id) {
-    const response = await fetch(`https://front-test.beta.aviasales.ru/tickets?searchId=${id}`);
-    if (!response.ok) {
-      throw new Error('bad request');
+    try {
+      const response = await fetch(`https://front-test.beta.aviasales.ru/tickets?searchId=${id}`);
+      const body = await response.json();
+      const { tickets, stop } = body;
+      return [tickets, stop];
+    } catch {
+      return [[], false];
     }
-    const body = await response.json();
-    const { tickets, stop } = body;
-    return [tickets, stop];
   }
 }
 

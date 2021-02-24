@@ -54,6 +54,8 @@ const Direction = ({ segment }) => {
 };
 
 Direction.propTypes = {
-  segment: PropTypes.objectOf.isRequired,
+  // todo react/forbid-prop-types
+  // eslint-disable-next-line react/forbid-prop-types
+  segment: PropTypes.object.isRequired,
 };
 export default Direction;
