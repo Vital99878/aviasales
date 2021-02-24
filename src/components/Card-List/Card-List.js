@@ -40,6 +40,7 @@ CardList.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
+  transfers: state.transfers,
   visible_tickets: state.visible_tickets,
   searchId: state.searchId,
   stop_load: state.stop_load,
