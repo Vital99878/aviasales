@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Spin } from 'antd';
 import classes from './Card-List.module.scss';
 import { get_tickets, setId } from '../../redux/actions';
-// import 'antd/dist/antd.css';
+import './Spin.scss';
 import Card from '../Card';
 
 const CardList = ({ on_get_tickets, onSetId, stop_load, searchId, visible_tickets }) => {
@@ -18,14 +18,14 @@ const CardList = ({ on_get_tickets, onSetId, stop_load, searchId, visible_ticket
 
   const list = visible_tickets.map((ticket) => <Card ticket={ticket} />);
   return (
-    <ul className={classes['card-list']}>
-      {!stop_load ? (
-        <li>
-          <Spin tip="Tickets loading..." />
-        </li>
-      ) : null}
-      {list.length === 0 && stop_load ? <Spin tip="try another filter" /> : list}
-    </ul>
+    <>
+      {!stop_load ? <Spin tip="Tickets loading" /> : null}
+      {list.length === 0 && stop_load ? (
+        <Spin tip="try another filter" />
+      ) : (
+        <ul className={classes['card-list']}>{list}</ul>
+      )}
+    </>
   );
 };
 

@@ -4,7 +4,6 @@ const initial_state = response_test;
 
 const reducer = (state = initial_state, action) => {
   switch (action.type) {
-    // todo if [], return "msg: no tickets"
     case 'TRANSFERS':
       let { transfers, visible_tickets, sorted_tickets, filtered_tickets } = state;
       const { quality } = action.payload;
@@ -28,7 +27,6 @@ const reducer = (state = initial_state, action) => {
       };
 
     case 'ALL_TRANSFERS':
-      // todo if [], return "msg: no tickets
       let { active_all } = state;
       if (state.transfers.length < 4) {
         state.transfers = [0, 1, 2, 3];
@@ -42,7 +40,6 @@ const reducer = (state = initial_state, action) => {
         state.transfers.includes(ticket.segments[0].stops.length)
       );
       state.visible_tickets = state.filtered_tickets.splice(state.index, 5);
-      console.log(state.visible_tickets);
 
       return {
         ...state,
