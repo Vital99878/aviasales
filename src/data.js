@@ -103,6 +103,46 @@ export const response_test = [
         ],
       },
       {
+        price: 68722,
+        carrier: 'SU',
+        segments: [
+          {
+            origin: 'MOW',
+            destination: 'HKT',
+            date: '2021-02-24T15:10:00.000Z',
+            stops: [],
+            duration: 662,
+          },
+          {
+            origin: 'HKT',
+            destination: 'MOW',
+            date: '2021-03-16T11:44:00.000Z',
+            stops: ['HKG', 'AUH', 'SIN'],
+            duration: 1919,
+          },
+        ],
+      },
+      {
+        price: 61184,
+        carrier: 'S7',
+        segments: [
+          {
+            origin: 'MOW',
+            destination: 'HKT',
+            date: '2021-02-24T06:40:00.000Z',
+            stops: ['SHA', 'HKG', 'KUL'],
+            duration: 873,
+          },
+          {
+            origin: 'HKT',
+            destination: 'MOW',
+            date: '2021-03-16T08:26:00.000Z',
+            stops: ['SIN'],
+            duration: 1564,
+          },
+        ],
+      },
+      {
         price: 87349,
         carrier: 'EK',
         segments: [
@@ -206,18 +246,3 @@ export const response_test = [
     stop: false,
   },
 ];
-
-export function rm_class(claz) {
-  const item = document.querySelector(`.${claz}`);
-  item.classList.remove(claz);
-}
-
-//all_tickets,
-//visible_tickets,
-//transfers,
-//active_all: transfers.length === 4,
-//load_tickets: true,
-//searchId: state.searchId,
-//stop_load: state.stop_load,
-
-// http://pics.avs.io/99/36/{LOGO}.png

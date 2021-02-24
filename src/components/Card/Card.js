@@ -5,8 +5,10 @@ import Direction from '../Direction';
 
 const Card = ({ ticket }) => {
   const { price, carrier, segments } = ticket;
+  const { date } = segments[0];
+
   return (
-    <li className={classes.card} key={Math.random() * 15000}>
+    <li className={classes.card} key={date + price}>
       <div className={classes.card__title}>
         <p className={classes.card__price}>{`${price.toLocaleString('ru')} р`}</p>
         <img src={`http://pics.avs.io/99/36/${carrier}.png`} alt={carrier} />
@@ -17,12 +19,6 @@ const Card = ({ ticket }) => {
   );
 };
 
-Card.defaultProp = {
-  label: '',
-  created: 'ett',
-  status: '',
-  id: Math.random() * 784,
-};
 Card.propTypes = {
   ticket: PropTypes.string.isRequired,
 };

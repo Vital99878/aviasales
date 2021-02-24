@@ -106,12 +106,6 @@ Filter.propTypes = {
   toggle_transfers: PropTypes.func.isRequired,
   select_all_transfers: PropTypes.func.isRequired,
   active_all: PropTypes.string.isRequired,
-  //  checked: PropTypes.string.isRequired,
-};
-Filter.defaultProp = {
-  toggle_transfers: PropTypes.func,
-  select_all_transfers: PropTypes.func,
-  //  filter: 'all',
 };
 
 export default connect(mapStateToProps, actions)(Filter);

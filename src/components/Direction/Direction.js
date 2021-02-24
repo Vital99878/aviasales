@@ -17,7 +17,7 @@ const Direction = ({ segment }) => {
   const time_end_minutes = add_zero((new Date(date).getMinutes() + (duration % 60)) % 60);
   const time_end = `${time_end_hours}:${time_end_minutes}`;
 
-  const update_transfer = (stops) => {
+  const update_word = (stops) => {
     if (stops.length === 0) {
       return 'без пересадок';
     }
@@ -32,38 +32,28 @@ const Direction = ({ segment }) => {
     }
   };
 
-  const transfer = update_transfer(stops);
+  const transfer = update_word(stops);
+  const { direction, direction__title, direction__part, direction__data } = classes;
 
   return (
-    <div className={classes.direction}>
-      <div className={classes.direction__part}>
-        <p className={classes.direction__title}>{`${origin} - ${destination}`}</p>
-        <p className={classes.direction__data}>{`${time_begin} - ${time_end}`}</p>
+    <div className={direction}>
+      <div className={direction__part}>
+        <p className={direction__title}>{`${origin} - ${destination}`}</p>
+        <p className={direction__data}>{`${time_begin} - ${time_end}`}</p>
       </div>
-      <div className={classes.direction__part}>
-        <p className={classes.direction__title}>В ПУТИ</p>
-        <p className={classes.direction__data}>{time}</p>
+      <div className={direction__part}>
+        <p className={direction__title}>В ПУТИ</p>
+        <p className={direction__data}>{time}</p>
       </div>
-      <div className={classes.direction__part}>
-        <p className={classes.direction__title}>{`${stops.length ? stops.length : ''} ${transfer}`}</p>
-        <p className={classes.direction__data}>{stops.length === 0 ? `\u2014` : stops.join(', ')}</p>
+      <div className={direction__part}>
+        <p className={direction__title}>{`${stops.length ? stops.length : ''} ${transfer}`}</p>
+        <p className={direction__data}>{stops.length === 0 ? `\u2014` : stops.join(', ')}</p>
       </div>
     </div>
   );
 };
 
-Direction.defaultProp = {
-  label: '',
-  created: 'ett',
-  status: '',
-  id: Math.random() * 784,
-};
 Direction.propTypes = {
   segment: PropTypes.objectOf.isRequired,
-  //  origin: PropTypes.string.isRequired,
-  //  destination: PropTypes.string.isRequired,
-  //  date: PropTypes.string.isRequired,
-  //  stops: PropTypes.arrayOf.isRequired,
-  //  duration: PropTypes.number.isRequired
 };
 export default Direction;

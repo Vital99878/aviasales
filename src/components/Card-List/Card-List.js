@@ -21,17 +21,13 @@ const CardList = ({ on_get_tickets, onSetId, stop_load, searchId, visible_ticket
   return (
     <>
       {!stop_load ? <Spin tip="Tickets loading" /> : null}
-      {list.length === 0 && stop_load ? (
+      {list.length === 0 ? (
         <Alert message="No tickets" description="Please, try selecting other filters" type="info" />
       ) : (
         <ul className={classes['card-list']}>{list}</ul>
       )}
     </>
   );
-};
-
-CardList.defaultProp = {
-  id: Math.random() * 784,
 };
 
 CardList.propTypes = {

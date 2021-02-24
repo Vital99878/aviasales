@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -43,4 +42,3 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(null, mapDispatchToProps)(Tabs);
-// export default Tabs;

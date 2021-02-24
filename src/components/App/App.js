@@ -1,6 +1,5 @@
 import React from 'react';
 import classes from './App.module.scss';
-
 import CardList from '../Card-List';
 import Filter from '../Filter';
 import Tabs from '../Tabs';
