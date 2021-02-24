@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classes from './Card.module.scss';
-import S7_logo from '../../img/S7 Logo.svg';
 import Direction from '../Direction';
 
 const Card = ({ ticket }) => {

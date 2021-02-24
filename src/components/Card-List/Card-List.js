@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Spin } from 'antd';
+import { Spin, Alert } from 'antd';
 import classes from './Card-List.module.scss';
 import { get_tickets, setId } from '../../redux/actions';
-import './Spin.scss';
+import './Spin_Alert.scss';
+
 import Card from '../Card';
 
 const CardList = ({ on_get_tickets, onSetId, stop_load, searchId, visible_tickets }) => {
@@ -21,7 +22,7 @@ const CardList = ({ on_get_tickets, onSetId, stop_load, searchId, visible_ticket
     <>
       {!stop_load ? <Spin tip="Tickets loading" /> : null}
       {list.length === 0 && stop_load ? (
-        <Spin tip="try another filter" />
+        <Alert message="No tickets" description="Please, try selecting other filters" type="info" />
       ) : (
         <ul className={classes['card-list']}>{list}</ul>
       )}
