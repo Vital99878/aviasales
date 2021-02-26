@@ -4,16 +4,7 @@ import PropTypes from 'prop-types';
 import * as actions from '../../redux/actions';
 import classes from './Filter.module.scss';
 
-const Filter = ({
-  toggle_transfers,
-  select_all_transfers,
-  active_all,
-  filtered_tickets,
-  sorted_tickets,
-  visible_tickets,
-  transfers,
-  index,
-}) => {
+const Filter = ({ toggle_transfers, select_all_transfers, active_all, transfers }) => {
   const select_all = () => {
     const all_items = document.querySelectorAll(`.${classes.filter__item}`);
     const all_inputs = document.querySelectorAll('input');
@@ -41,15 +32,20 @@ const Filter = ({
       transfers = [];
       active_all = false;
     }
-
-    filtered_tickets = sorted_tickets.filter((ticket) => transfers.includes(ticket.segments[0].stops.length));
-    visible_tickets = filtered_tickets.splice(index, 5);
-    select_all_transfers(filtered_tickets, visible_tickets, active_all, transfers);
+    select_all_transfers(active_all, transfers);
   };
 
   const get_quantity_transfer = (evt) => {
-    const quantity = evt.target.dataset.transfers;
-    toggle_transfers(quantity);
+    const quantity = Number(evt.target.dataset.transfers);
+
+    if (transfers.includes(quantity)) {
+      transfers = transfers.filter((item) => item !== quantity);
+    } else {
+      transfers.push(quantity);
+    }
+
+    toggle_transfers(transfers);
+
     const item = evt.target.parentNode.parentNode;
     item.classList.toggle(classes.filter__itemActive);
   };
@@ -128,11 +124,7 @@ Filter.propTypes = {
   toggle_transfers: PropTypes.func.isRequired,
   select_all_transfers: PropTypes.func.isRequired,
   active_all: PropTypes.bool.isRequired,
-  sorted_tickets: PropTypes.arrayOf.isRequired,
-  filtered_tickets: PropTypes.arrayOf.isRequired,
-  visible_tickets: PropTypes.arrayOf.isRequired,
-  transfers: PropTypes.arrayOf.isRequired,
-  index: PropTypes.number.isRequired,
+  transfers: PropTypes.arrayOf(PropTypes.number).isRequired,
 };
 
 export default connect(mapStateToProps, actions)(Filter);

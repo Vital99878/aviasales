@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import classes from './More.module.scss';
 
-const More = ({ more_tickets, index }) => {
+const More = ({ index, more_tickets }) => {
   const show_more = () => {
     index += 5;
     more_tickets(index);
@@ -16,8 +16,8 @@ const More = ({ more_tickets, index }) => {
 };
 
 More.propTypes = {
-  more_tickets: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
+  more_tickets: PropTypes.func.isRequired,
 };
 const mapStateToProps = (state) => ({
   index: state.index,
