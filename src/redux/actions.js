@@ -1,12 +1,18 @@
 import { getId, getTickets } from '../tickets/tickets_api';
 
 export const toggle_transfers = (quality) => ({ type: 'TRANSFERS', payload: { quality: Number(quality) } });
-export const select_all_transfers = () => ({ type: 'ALL_TRANSFERS' });
+export const select_all_transfers = (filtered_tickets, visible_tickets, active_all, transfers) => ({
+  type: 'ALL_TRANSFERS',
+  filtered_tickets,
+  visible_tickets,
+  active_all,
+  transfers,
+});
 
 export function setId() {
   return async (dispatch) => {
     const searchId = await getId();
-    dispatch({ type: 'SET_ID', payload: { searchId } });
+    dispatch({ type: 'SET_ID', searchId });
   };
 }
 

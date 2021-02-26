@@ -9,13 +9,13 @@ import './Spin_Alert.scss';
 import Card from '../Card';
 
 const CardList = ({ on_get_tickets, onSetId, stop_load, searchId, visible_tickets }) => {
-  useEffect(() => {
-    onSetId();
-  }, []);
-
-  if (searchId && !stop_load) {
-    on_get_tickets(searchId);
-  }
+  //  useEffect(() => {
+  //    onSetId();
+  //  }, []);
+  //
+  //  if (searchId && !stop_load) {
+  //    on_get_tickets(searchId);
+  //  }
 
   const list = visible_tickets.map((ticket) => <Card ticket={ticket} />);
 

@@ -27,29 +27,16 @@ const reducer = (state = initial_state, action) => {
       };
 
     case 'ALL_TRANSFERS':
-      let { active_all } = state;
-      if (state.transfers.length < 4) {
-        state.transfers = [0, 1, 2, 3];
-        active_all = true;
-      } else {
-        state.transfers = [];
-        active_all = false;
-      }
-
-      state.filtered_tickets = state.sorted_tickets.filter((ticket) =>
-        state.transfers.includes(ticket.segments[0].stops.length)
-      );
-      state.visible_tickets = state.filtered_tickets.splice(state.index, 5);
-
       return {
         ...state,
-        active_all: active_all,
-        filtered_tickets: state.filtered_tickets,
-        visible_tickets: state.visible_tickets,
+        filtered_tickets: action.filtered_tickets,
+        visible_tickets: action.visible_tickets,
+        active_all: action.active_all,
+        transfers: action.transfers,
       };
 
     case 'SET_ID':
-      return { ...state, searchId: action.payload.searchId };
+      return { ...state, searchId: action.searchId };
 
     case 'NEW_TICKETS':
       let { new_tickets, stop } = action.payload;
@@ -83,9 +70,7 @@ const reducer = (state = initial_state, action) => {
       };
 
     case 'MORE':
-      let { index } = action.payload;
-      index += 5;
-      return { ...state, visible_tickets: state.filtered_tickets.splice(index, 5) };
+      return { ...state, visible_tickets: state.filtered_tickets.splice(action.index, 5) };
 
     default:
       return {
