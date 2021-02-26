@@ -75,27 +75,10 @@ const reducer = (state = initial_state, action) => {
       }
 
     case 'TAB':
-      const { tab } = action.payload;
-      if (tab === 'Самый дешевый') {
-        state.sorted_tickets = state.sorted_tickets.sort((a, b) => a.price - b.price);
-      }
-
-      if (tab === 'Самый быстрый') {
-        state.sorted_tickets = state.sorted_tickets.sort((a, b) => {
-          const duration_a = a.segments[0].duration + a.segments[1].duration;
-          const duration_b = b.segments[0].duration + b.segments[1].duration;
-          return duration_a - duration_b;
-        });
-      }
-
-      state.filtered_tickets = state.sorted_tickets.filter((ticket) =>
-        state.transfers.includes(ticket.segments[0].stops.length + ticket.segments[1].stops.length)
-      );
-
       return {
         ...state,
-        sorted_tickets: state.sorted_tickets,
-        visible_tickets: state.filtered_tickets.splice(0, 5),
+        filtered_tickets: action.filtered_tickets,
+        visible_tickets: action.filtered_tickets.splice(0, 5),
         index: 0,
       };
 

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import classes from './Tabs.module.scss';
 
-function Tabs({ onToggleTab }) {
+function Tabs({ sorted_tickets, filtered_tickets, onToggleTab, transfers }) {
   const { tabs, tab, tabActive } = classes;
 
   function remove_class(current_class) {
@@ -18,7 +18,23 @@ function Tabs({ onToggleTab }) {
       remove_class(tabActive);
       item.classList.add(tabActive);
     }
-    onToggleTab(tab_value);
+
+    if (tab_value === 'Самый дешевый') {
+      sorted_tickets = sorted_tickets.sort((a, b) => a.price - b.price);
+    }
+    if (tab_value === 'Самый быстрый') {
+      sorted_tickets = sorted_tickets.sort((a, b) => {
+        const duration_a = a.segments[0].duration + a.segments[1].duration;
+        const duration_b = b.segments[0].duration + b.segments[1].duration;
+        return duration_a - duration_b;
+      });
+    }
+
+    filtered_tickets = sorted_tickets.filter((ticket) =>
+      transfers.includes(ticket.segments[0].stops.length + ticket.segments[1].stops.length)
+    );
+
+    onToggleTab(filtered_tickets);
   };
 
   return (
@@ -35,10 +51,19 @@ function Tabs({ onToggleTab }) {
 
 Tabs.propTypes = {
   onToggleTab: PropTypes.func.isRequired,
+  filtered_tickets: PropTypes.arrayOf.isRequired,
+  sorted_tickets: PropTypes.arrayOf.isRequired,
+  transfers: PropTypes.arrayOf.isRequired,
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  onToggleTab: (tab) => dispatch({ type: 'TAB', payload: { tab } }),
+const mapStateToProps = (state) => ({
+  sorted_tickets: state.sorted_tickets,
+  filtered_tickets: state.filtered_tickets,
+  transfers: state.transfers,
 });
 
-export default connect(null, mapDispatchToProps)(Tabs);
+const mapDispatchToProps = (dispatch) => ({
+  onToggleTab: (filtered_tickets) => dispatch({ type: 'TAB', filtered_tickets }),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Tabs);
