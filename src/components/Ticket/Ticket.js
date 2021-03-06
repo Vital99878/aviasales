@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classes from './Card.module.scss';
+import classes from './Ticket.module.scss';
 import Direction from '../Direction';
 
-const Card = ({ ticket }) => {
+const Ticket = ({ ticket }) => {
   const { price, carrier, segments } = ticket;
   const { date } = segments[0];
 
@@ -19,9 +19,9 @@ const Card = ({ ticket }) => {
   );
 };
 
-Card.propTypes = {
+Ticket.propTypes = {
   // todo react/forbid-prop-types
   // eslint-disable-next-line react/forbid-prop-types
   ticket: PropTypes.object.isRequired,
 };
-export default Card;
+export default Ticket;

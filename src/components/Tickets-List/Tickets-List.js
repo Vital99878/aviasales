@@ -2,20 +2,21 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Spin, Alert } from 'antd';
-import classes from './Card-List.module.scss';
-import { get_tickets, setId } from '../../redux/actions';
+import * as actions from '../../redux/actions';
+import classes from './Tickets-List.module.scss';
+
 import './Spin_Alert.scss';
 
-import Card from '../Card';
+import Ticket from '../Ticket';
 import More from '../More/More';
 
-const CardList = ({ all_tickets, transfers, on_get_tickets, onSetId, stop_load, index, searchId, tab_value }) => {
+const TicketsList = ({ all_tickets, tab_value, transfers, get_tickets, set_id, stop_load, index, searchId }) => {
   useEffect(() => {
-    onSetId();
+    set_id();
   }, [transfers]);
 
   if (searchId && !stop_load) {
-    on_get_tickets(searchId);
+    get_tickets(searchId);
   }
 
   let sorted_tickets;
@@ -30,13 +31,9 @@ const CardList = ({ all_tickets, transfers, on_get_tickets, onSetId, stop_load, 
     });
   }
 
-  const filtered_tickets = sorted_tickets.filter((ticket) =>
-    transfers.includes(ticket.segments[0].stops.length + ticket.segments[1].stops.length)
-  );
-
+  const filtered_tickets = sorted_tickets.filter((ticket) => transfers.includes(ticket.segments[0].stops.length));
   const visible_tickets = filtered_tickets.splice(0, index);
-
-  const list = visible_tickets.map((ticket) => <Card ticket={ticket} />);
+  const list = visible_tickets.map((ticket) => <Ticket ticket={ticket} />);
 
   return (
     <>
@@ -51,11 +48,11 @@ const CardList = ({ all_tickets, transfers, on_get_tickets, onSetId, stop_load, 
   );
 };
 
-CardList.propTypes = {
+TicketsList.propTypes = {
   all_tickets: PropTypes.arrayOf.isRequired,
   searchId: PropTypes.string.isRequired,
-  on_get_tickets: PropTypes.func.isRequired,
-  onSetId: PropTypes.func.isRequired,
+  get_tickets: PropTypes.func.isRequired,
+  set_id: PropTypes.func.isRequired,
   stop_load: PropTypes.bool.isRequired,
   tab_value: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
@@ -71,9 +68,4 @@ const mapStateToProps = (state) => ({
   index: state.index,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  on_get_tickets: (id) => dispatch(get_tickets(id)),
-  onSetId: () => dispatch(setId()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(CardList);
+export default connect(mapStateToProps, actions)(TicketsList);
