@@ -3,17 +3,18 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import classes from './More.module.scss';
 
-const More = ({ index, more_tickets }) => {
-  const show_more = () => {
-    index += 5;
-    more_tickets(index);
-  };
-  return (
-    <button className={classes.more} onClick={show_more} type="button">
-      Показать еще 5 билетов!
-    </button>
-  );
-};
+const More = ({ index, more_tickets }) => (
+  <button
+    className={classes.more}
+    onClick={() => {
+      index += 5;
+      more_tickets(index);
+    }}
+    type="button"
+  >
+    Показать еще 5 билетов!
+  </button>
+);
 
 More.propTypes = {
   index: PropTypes.number.isRequired,

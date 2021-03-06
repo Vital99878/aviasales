@@ -9,7 +9,7 @@ const reducer = (state = initial_state, action) => {
         ...state,
         transfers: action.transfers,
         active_all: action.transfers.length === 4,
-        index: 0,
+        index: 5,
       };
 
     case 'ALL_TRANSFERS':
@@ -17,7 +17,7 @@ const reducer = (state = initial_state, action) => {
         ...state,
         active_all: action.active_all,
         transfers: action.transfers,
-        index: 0,
+        index: 5,
       };
 
     case 'SET_ID':
@@ -29,14 +29,14 @@ const reducer = (state = initial_state, action) => {
         ...state,
         all_tickets: [...state.all_tickets, ...new_tickets],
         stop_load: state.stop_load ? true : stop,
-        index: 0,
+        index: 5,
       };
 
     case 'TAB':
       return {
         ...state,
         tab_value: action.tab_value,
-        index: 0,
+        index: 5,
       };
 
     case 'MORE':
@@ -53,7 +53,7 @@ const reducer = (state = initial_state, action) => {
         searchId: '',
         stop_load: false,
         active_all: true,
-        index: 0,
+        index: 5,
       };
   }
 };

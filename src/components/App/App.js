@@ -12,7 +12,6 @@ function App() {
       <div className={classes['column-2']}>
         <Tabs />
         <CardList />
-        <More />
       </div>
     </div>
   );

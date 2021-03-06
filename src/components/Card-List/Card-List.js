@@ -7,6 +7,7 @@ import { get_tickets, setId } from '../../redux/actions';
 import './Spin_Alert.scss';
 
 import Card from '../Card';
+import More from '../More/More';
 
 const CardList = ({ all_tickets, transfers, on_get_tickets, onSetId, stop_load, index, searchId, tab_value }) => {
   useEffect(() => {
@@ -33,7 +34,7 @@ const CardList = ({ all_tickets, transfers, on_get_tickets, onSetId, stop_load, 
     transfers.includes(ticket.segments[0].stops.length + ticket.segments[1].stops.length)
   );
 
-  const visible_tickets = filtered_tickets.splice(index, 5);
+  const visible_tickets = filtered_tickets.splice(0, index);
 
   const list = visible_tickets.map((ticket) => <Card ticket={ticket} />);
 
@@ -45,6 +46,7 @@ const CardList = ({ all_tickets, transfers, on_get_tickets, onSetId, stop_load, 
       ) : (
         <ul className={classes['card-list']}>{list}</ul>
       )}
+      {list.length !== 0 && <More />}
     </>
   );
 };
