@@ -13,7 +13,7 @@ import More from '../More/More';
 const TicketsList = ({ all_tickets, tab_value, transfers, get_tickets, set_id, stop_load, index, searchId }) => {
   useEffect(() => {
     set_id();
-  }, [transfers]);
+  }, []);
 
   if (searchId && !stop_load) {
     get_tickets(searchId);

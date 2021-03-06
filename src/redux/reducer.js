@@ -7,6 +7,7 @@ const reducer = (state = initial_state, action) => {
     case 'TRANSFERS':
       return {
         ...state,
+        all_tickets: [...state.all_tickets],
         transfers: action.transfers,
         active_all: action.transfers.length === 4,
         index: 5,
