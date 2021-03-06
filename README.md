@@ -1,1 +1,1 @@
-# deploy : https://aviasales-kyymbsrbx-vital99878.vercel.app/
+# deploy: https://github.com/Vital99878/aviasales/deployments

@@ -32,18 +32,17 @@ const TicketsList = ({ all_tickets, tab_value, transfers, get_tickets, set_id, s
   }
 
   const filtered_tickets = sorted_tickets.filter((ticket) => transfers.includes(ticket.segments[0].stops.length));
-  const visible_tickets = filtered_tickets.splice(0, index);
-  const list = visible_tickets.map((ticket) => <Ticket ticket={ticket} />);
+  const visible_tickets = filtered_tickets.splice(0, index).map((ticket) => <Ticket ticket={ticket} />);
 
   return (
     <>
       {!stop_load ? <Spin tip="Tickets loading" /> : null}
-      {list.length === 0 ? (
+      {visible_tickets.length === 0 ? (
         <Alert message="No tickets" description="Please, try selecting other filters" type="info" />
       ) : (
-        <ul className={classes['card-list']}>{list}</ul>
+        <ul className={classes['card-list']}>{visible_tickets}</ul>
       )}
-      {list.length !== 0 && <More />}
+      {visible_tickets.length !== 0 && <More />}
     </>
   );
 };
