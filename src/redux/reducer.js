@@ -55,6 +55,7 @@ const reducer = (state = initial_state, action) => {
         stop_load: false,
         active_all: true,
         index: 5,
+        visible_tickets: [],
       };
   }
 };
