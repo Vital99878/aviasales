@@ -1,34 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import classes from './Tabs.module.scss';
 
 function Tabs({ onToggleTab, tab_value }) {
   const { tabs, tab, tabActive } = classes;
+  const [activeList, setActiveClass] = useState([true, false]);
+  const [active_1, active_2] = activeList;
 
-  function remove_class(current_class) {
-    const item = document.querySelector(`.${current_class}`);
-    item.classList.remove(current_class);
+  function toggle_tab(evt) {
+    const tabContent = evt.target.textContent;
+    const tabIndex = Number(evt.target.dataset.index);
+    setActiveClass(() => activeList.map((active, index) => tabIndex === index));
+    if (tabContent !== tab_value) {
+      onToggleTab(tabContent);
+    }
   }
-
-  const toggle_tab = (evt) => {
-    const item = evt.target;
-    const tab_content = evt.target.textContent;
-    if (item.classList.contains(tab)) {
-      remove_class(tabActive);
-      item.classList.add(tabActive);
-    }
-    if (tab_content !== tab_value) {
-      onToggleTab(tab_content);
-    }
-  };
 
   return (
     <div className={tabs}>
-      <button className={`${tab} ${tabActive}`} onClick={toggle_tab} type="button">
+      <button className={`${tab} ${active_1 ? tabActive : null}`} onClick={toggle_tab} type="button" data-index="0">
         Самый дешевый
       </button>
-      <button className={tab} onClick={toggle_tab} type="button">
+      <button className={`${tab} ${active_2 ? tabActive : null}`} onClick={toggle_tab} type="button" data-index="1">
         Самый быстрый
       </button>
     </div>
