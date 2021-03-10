@@ -1,8 +1,4 @@
-import { response_test } from '../data';
-
-const initial_state = response_test;
-
-const reducer = (state = initial_state, action) => {
+const reducer = (state, action) => {
   switch (action.type) {
     case 'TRANSFERS':
       return {
@@ -49,7 +45,7 @@ const reducer = (state = initial_state, action) => {
     default:
       return {
         tab_value: 'Самый дешевый',
-        all_tickets: state[0].tickets,
+        all_tickets: [],
         transfers: [0, 1, 2, 3],
         searchId: '',
         stop_load: false,
