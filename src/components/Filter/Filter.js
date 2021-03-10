@@ -40,11 +40,7 @@ const Filter = ({ toggle_transfers, select_all_transfers, active_all, transfers 
     } else {
       transfers.push(quantity);
     }
-
     toggle_transfers(transfers);
-
-    const item = evt.target.parentNode.parentNode;
-    item.classList.toggle(filter__itemActive);
   };
 
   return (

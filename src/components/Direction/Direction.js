@@ -4,14 +4,14 @@ import PropTypes from 'prop-types';
 import classes from './Direction.module.scss';
 
 const Direction = ({ segment }) => {
-  const { origin, destination, date, stops, duration } = segment;
-  const time = `${Math.floor(duration / 60)}ч ${duration % 60}м `;
   const add_zero = (number) => {
     if (number < 10) {
       return `0${number}`;
     }
     return number;
   };
+  const { origin, destination, date, stops, duration } = segment;
+  const time = `${Math.floor(duration / 60)}ч ${duration % 60}м `;
   const time_begin = `${add_zero(new Date(date).getHours())}:${add_zero(new Date(date).getMinutes())}`;
   const time_end_hours = add_zero(new Date(date).getHours() + (Math.floor(duration / 60) % 24));
   const time_end_minutes = add_zero((new Date(date).getMinutes() + (duration % 60)) % 60);

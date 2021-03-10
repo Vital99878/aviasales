@@ -19,7 +19,7 @@ const TicketsList = ({ visible_tickets, get_tickets, set_id, stop_load, searchId
     get_tickets(searchId);
   }
 
-  const list = visible_tickets().map((ticket) => <Ticket ticket={ticket} />);
+  const list = visible_tickets.map((ticket) => <Ticket ticket={ticket} />);
 
   return (
     <>
@@ -42,24 +42,26 @@ TicketsList.propTypes = {
   stop_load: PropTypes.bool.isRequired,
 };
 
+function setVisible(state) {
+  let sorted_tickets;
+  if (state.tab_value === 'Самый дешевый') {
+    sorted_tickets = state.all_tickets.sort((a, b) => a.price - b.price);
+  }
+  if (state.tab_value === 'Самый быстрый') {
+    sorted_tickets = state.all_tickets.sort((a, b) => {
+      const duration_a = a.segments[0].duration + a.segments[1].duration;
+      const duration_b = b.segments[0].duration + b.segments[1].duration;
+      return duration_a - duration_b;
+    });
+  }
+  return sorted_tickets
+    .filter((ticket) => state.transfers.includes(ticket.segments[0].stops.length))
+    .splice(0, state.index);
+}
+
 const mapStateToProps = (state) => ({
   transfers: state.transfers,
-  visible_tickets: () => {
-    let sorted_tickets;
-    if (state.tab_value === 'Самый дешевый') {
-      sorted_tickets = state.all_tickets.sort((a, b) => a.price - b.price);
-    }
-    if (state.tab_value === 'Самый быстрый') {
-      sorted_tickets = state.all_tickets.sort((a, b) => {
-        const duration_a = a.segments[0].duration + a.segments[1].duration;
-        const duration_b = b.segments[0].duration + b.segments[1].duration;
-        return duration_a - duration_b;
-      });
-    }
-    return sorted_tickets
-      .filter((ticket) => state.transfers.includes(ticket.segments[0].stops.length))
-      .splice(0, state.index);
-  },
+  visible_tickets: setVisible(state),
   searchId: state.searchId,
   stop_load: state.stop_load,
   tab_value: state.tab_value,

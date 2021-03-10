@@ -3,9 +3,8 @@ const reducer = (state, action) => {
     case 'TRANSFERS':
       return {
         ...state,
-        all_tickets: [...state.all_tickets],
         transfers: action.transfers,
-        active_all: action.transfers.length === 4,
+        active_all: action.active_all,
         index: 5,
       };
 
@@ -21,12 +20,16 @@ const reducer = (state, action) => {
       return { ...state, searchId: action.searchId };
 
     case 'NEW_TICKETS':
-      let { new_tickets, stop } = action;
       return {
         ...state,
-        all_tickets: [...state.all_tickets, ...new_tickets],
-        stop_load: state.stop_load ? true : stop,
+        all_tickets: [...state.all_tickets, ...action.new_tickets],
         index: 5,
+      };
+
+    case 'STOP':
+      return {
+        ...state,
+        stop_load: action.stop_load,
       };
 
     case 'TAB':
