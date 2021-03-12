@@ -1,4 +1,15 @@
-const reducer = (state, action) => {
+const initialState = {
+  tab_value: 'Самый дешевый',
+  all_tickets: [],
+  transfers: [0, 1, 2, 3],
+  searchId: '',
+  stop_load: false,
+  active_all: true,
+  index: 5,
+  visible_tickets: [],
+};
+
+const reducer = (state = initialState, action) => {
   switch (action.type) {
     case 'TRANSFERS':
       return {
@@ -46,16 +57,7 @@ const reducer = (state, action) => {
       };
 
     default:
-      return {
-        tab_value: 'Самый дешевый',
-        all_tickets: [],
-        transfers: [0, 1, 2, 3],
-        searchId: '',
-        stop_load: false,
-        active_all: true,
-        index: 5,
-        visible_tickets: [],
-      };
+      return state;
   }
 };
 
