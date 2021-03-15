@@ -1,4 +1,4 @@
-@import '../variables';
+@import '../../variables';
 
 .filter {
   box-sizing: border-box;
@@ -47,7 +47,6 @@
   input {
     margin-left: 20px;
   }
-  //todo input checkbox and modules style
 
   p {
     margin-left: 20px;
@@ -57,7 +56,7 @@
   }
 }
 
-.filter__item--active {
+.filter__itemActive {
   height: 40px;
   width: 100%;
   display: grid;

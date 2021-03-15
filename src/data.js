@@ -2,7 +2,7 @@ export const response_test = [
   {
     tickets: [
       {
-        price: 73346,
+        price: 101000,
         carrier: 'TG', // Код авиакомпании перевозчика
         segments: [
           // 1 туда, 2 обратно
@@ -23,7 +23,7 @@ export const response_test = [
         ],
       },
       {
-        price: 68250,
+        price: 99000,
         carrier: 'MH',
         segments: [
           {
@@ -99,6 +99,46 @@ export const response_test = [
             date: '2021-03-15T22:39:00.000Z',
             stops: ['KUL', 'AUH'],
             duration: 1222,
+          },
+        ],
+      },
+      {
+        price: 68722,
+        carrier: 'SU',
+        segments: [
+          {
+            origin: 'MOW',
+            destination: 'HKT',
+            date: '2021-02-24T15:10:00.000Z',
+            stops: [],
+            duration: 662,
+          },
+          {
+            origin: 'HKT',
+            destination: 'MOW',
+            date: '2021-03-16T11:44:00.000Z',
+            stops: ['HKG', 'AUH', 'SIN'],
+            duration: 1919,
+          },
+        ],
+      },
+      {
+        price: 61184,
+        carrier: 'S7',
+        segments: [
+          {
+            origin: 'MOW',
+            destination: 'HKT',
+            date: '2021-02-24T06:40:00.000Z',
+            stops: ['SHA', 'HKG', 'KUL'],
+            duration: 873,
+          },
+          {
+            origin: 'HKT',
+            destination: 'MOW',
+            date: '2021-03-16T08:26:00.000Z',
+            stops: ['SIN'],
+            duration: 1564,
           },
         ],
       },
